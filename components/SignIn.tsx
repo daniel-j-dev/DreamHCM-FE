@@ -2,20 +2,35 @@
 import type { NextPage } from "next";
 import { BaseSyntheticEvent } from "react";
 import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-// Functions
 const SignIn: NextPage = () => {
+  // Functions
   const onSubmit = (v: Object, e: BaseSyntheticEvent | undefined) => {
     e?.preventDefault();
-    console.log(v);
+    // console.log(v);
   };
 
   // Form / input validation
+  let inputSchema = yup.object().shape({
+    email: yup
+      .string()
+      .required("An email address is required.")
+      .email("Provide a valid email address."),
+    password: yup
+      .string()
+      .required("A password is required.")
+      .min(6, "Password must be at least 6 characters."),
+  });
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(inputSchema),
+  });
 
   // JSX
   return (
@@ -28,11 +43,27 @@ const SignIn: NextPage = () => {
         placeholder="Enter your email"
         {...register("email", { required: true })}
       ></input>
+
+      {/* Email input error messages */}
+      {errors?.email?.message ? (
+        <span className="error">{`${errors?.email?.message}`}</span>
+      ) : (
+        <></>
+      )}
+
       <input
         type="password"
         placeholder="Password"
         {...register("password", { required: true })}
       ></input>
+
+      {/* Password input error messages */}
+      {errors?.password?.message ? (
+        <span className="error">{`${errors?.password?.message}`}</span>
+      ) : (
+        <></>
+      )}
+
       <button className="submitBtn">Sign in</button>
       <style>{`
             .inputForm {
@@ -66,6 +97,14 @@ const SignIn: NextPage = () => {
               width: 100%;
     
               font-size: 18px;
+            }
+
+            .error {
+                color: red;
+
+                align-self: start;
+
+                margin-bottom: 15px;
             }
           `}</style>
     </form>

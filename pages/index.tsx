@@ -7,6 +7,7 @@ import bgImg from "../assets/DreamHCM-Background.png";
 
 // Component imports
 import SignIn from "../components/SignIn";
+import SignUp from "../components/SignUp";
 
 // Functions
 const Home: NextPage = () => {
@@ -43,6 +44,7 @@ const Home: NextPage = () => {
           <button className="switchFormBtn">Sign up</button>
         </div>
         <SignIn />
+        {/* <SignUp /> */}
       </div>
       <style>{`
         .outer {
