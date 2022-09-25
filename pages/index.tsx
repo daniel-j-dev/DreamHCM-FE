@@ -24,7 +24,7 @@ const Home: NextPage = () => {
         </h1>
         <h3>Sign in with your email</h3>
         <div>
-          <span>Don't have an account?</span>{" "}
+          <span>{"Don't have an account?"}</span>{" "}
           <button className="switchFormBtn">Sign up</button>
         </div>
         <form className="inputForm" onSubmit={(e) => handleSubmit(e)}>
