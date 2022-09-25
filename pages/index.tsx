@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { FormEvent } from "react";
-//import Image from 'next/image'
+import bgImg from "../assets/DreamHCM-Background.png";
 
 const Home: NextPage = () => {
   const handleSubmit = (e: FormEvent) => {
@@ -41,11 +41,15 @@ const Home: NextPage = () => {
           display: flex;
           justify-content: center;
           align-items: center;
+
+          background-image: url(${bgImg.src});
         }
 
         .inner {
           height: 100%;
           width: 100%;
+
+          background-color: white;
 
           display: flex;
           flex-direction: column;
