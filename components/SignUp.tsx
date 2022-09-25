@@ -111,6 +111,7 @@ const SignUp: NextPage = () => {
               border-radius: 10px;
     
               height: 50px;
+              min-height: 42px;
               width: 100%;
     
               font-size: 18px;

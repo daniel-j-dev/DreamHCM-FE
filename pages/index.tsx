@@ -1,27 +1,21 @@
 // Imports
 import type { NextPage } from "next";
 import Head from "next/head";
-import { BaseSyntheticEvent } from "react";
-import { useForm } from "react-hook-form";
+import { useState } from "react";
 import bgImg from "../assets/DreamHCM-Background.png";
 
 // Component imports
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
 
-// Functions
 const Home: NextPage = () => {
-  const onSubmit = (v: Object, e: BaseSyntheticEvent | undefined) => {
-    e?.preventDefault();
-    console.log(v);
-  };
+  // State
+  const [fTypeState, setFTypeState] = useState("Sign in");
 
-  // Form / input validation
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  // Functions
+  const changeFormType = (t: "Sign in" | "Sign up") => {
+    setFTypeState(t);
+  };
 
   // JSX
   return (
@@ -38,13 +32,36 @@ const Home: NextPage = () => {
         <h1 className="brandName">
           Dream<span className="brandHCM">HCM</span>
         </h1>
-        <h3>Sign in with your email</h3>
-        <div>
-          <span>{"Don't have an account?"}</span>{" "}
-          <button className="switchFormBtn">Sign up</button>
-        </div>
-        <SignIn />
-        {/* <SignUp /> */}
+
+        {fTypeState === "Sign in" ? (
+          <>
+            <h3>Sign in with your email</h3>
+            <div>
+              <span>{"Don't have an account?"}</span>{" "}
+              <button
+                className="switchFormBtn"
+                onClick={() => changeFormType("Sign up")}
+              >
+                Sign up
+              </button>
+            </div>
+            <SignIn />
+          </>
+        ) : (
+          <>
+            <h3>Sign up with your email</h3>
+            <div>
+              <span>{"Already have an account?"}</span>{" "}
+              <button
+                className="switchFormBtn"
+                onClick={() => changeFormType("Sign in")}
+              >
+                Sign in
+              </button>
+            </div>
+            <SignUp />
+          </>
+        )}
       </div>
       <style>{`
         .outer {
