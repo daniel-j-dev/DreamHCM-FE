@@ -1,5 +1,5 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
+import type { NextPage } from "next";
+import Head from "next/head";
 
 const Analytics: NextPage = () => {
   return (
@@ -8,7 +8,7 @@ const Analytics: NextPage = () => {
         <title>DreamHCM - Analytics</title>
       </Head>
     </div>
-  )
-}
+  );
+};
 
-export default Analytics
+export default Analytics;

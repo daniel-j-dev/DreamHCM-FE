@@ -1,5 +1,5 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
+import type { NextPage } from "next";
+import Head from "next/head";
 
 const Dashboard: NextPage = () => {
   return (
@@ -7,8 +7,12 @@ const Dashboard: NextPage = () => {
       <Head>
         <title>DreamHCM - Dashboard</title>
       </Head>
-    </div>
-  )
-}
 
-export default Dashboard
+      <style>{`
+ 
+      `}</style>
+    </div>
+  );
+};
+
+export default Dashboard;

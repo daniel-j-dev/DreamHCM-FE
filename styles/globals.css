@@ -1,9 +1,17 @@
+@import "@fontsource/mukta";
+
 html,
-body {
+body,
+#__next {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 a {
@@ -15,12 +23,30 @@ a {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
   body {
-    color: white;
-    background: black;
+    color: black;
+    background: #FFFFFF;
   }
+} */
+
+body {
+  background: #FFFFFF;
+}
+
+* {
+  color: #303841;
+  font-family: "Mukta";
+}
+
+/* Remove default button and input styling */
+
+button, input {
+  border:none;
+  background-color:transparent;
+  outline:none;
+  padding: 0px;
 }
