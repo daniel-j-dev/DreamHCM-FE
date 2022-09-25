@@ -1,10 +1,18 @@
-## DreamHCM Frontend
+## Steps to start development
 
-Steps to start development
+1. Navigate to the root directory in a terminal or command prompt
+2. Execute `npm i` to install dependencies
+3. Create a file in the root directory named `.env.local`
+4. Fill `.env.local` with the necessary data (see template below)
+5. Execute `npm run dev` to start the development enviornment
+6. Navigate to http://localhost:3000/ in your web browser
 
-```bash
-$ npm i
-$ npm run dev
+## Template for `.env.local`
+
+```
+#Note: "NEXT_PUBLIC_" is used as a prefix for env usage in the browers
+
+NEXT_PUBLIC_BACKEND_URL=http://localhost:3001
 ```
 
 ## Color palette reference

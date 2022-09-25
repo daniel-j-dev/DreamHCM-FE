@@ -4,12 +4,13 @@ import { BaseSyntheticEvent } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { signIn } from "../api/index";
 
 const SignIn: NextPage = () => {
   // Functions
   const onSubmit = (v: Object, e: BaseSyntheticEvent | undefined) => {
     e?.preventDefault();
-    // console.log(v);
+    signIn(v);
   };
 
   // Form / input validation
