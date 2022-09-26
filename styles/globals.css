@@ -50,3 +50,7 @@ button, input {
   outline:none;
   padding: 0px;
 }
+
+button {
+  cursor: pointer;
+}
