@@ -13,7 +13,7 @@ type UserData = {
 export const signIn = (formValues: Object) => {
   // Check if "formValues" includes both an email and a password
   if (!(formValues as UserData)) {
-    return {};
+    return;
   }
 
   return axios.post(
@@ -24,9 +24,11 @@ export const signIn = (formValues: Object) => {
 
 export const signUp = async (formValues: Object) => {
   if (!(formValues as UserData)) {
-    return {};
+    return;
   }
 
-  console.log(formValues);
-  return {};
+  return axios.post(
+    process.env.NEXT_PUBLIC_BACKEND_URL + "/user/signup",
+    formValues
+  );
 };

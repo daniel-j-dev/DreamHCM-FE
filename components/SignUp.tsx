@@ -4,16 +4,44 @@ import { BaseSyntheticEvent } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { signUp } from "../api/users";
+import { signUp, signIn } from "../api/users";
+import useStore from "../state/store";
+import { useRouter } from "next/router";
 
 const SignUp: NextPage = () => {
+  // State
+  const setUser = useStore((state) => state.setUser);
+
+  // Setup router
+  const router = useRouter();
+
   // Functions
-  const onSubmit = (v: any, e: BaseSyntheticEvent | undefined) => {
+  const onSubmit = async (v: any, e: BaseSyntheticEvent | undefined) => {
     e?.preventDefault();
-    signUp({
-      email: v?.email,
-      password: v?.password,
-    });
+
+    try {
+      // Attempt creating an account
+      const newUser = {
+        email: v?.email,
+        password: v?.password,
+      };
+      await signUp(newUser);
+
+      // If successful, sign in
+      const createdUser = await signIn(newUser);
+
+      // Add token to localStorage and state
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ user: { token: createdUser.data } })
+      );
+      setUser({ token: createdUser.data });
+
+      // Redirect to /dashboard
+      router.push("/dashboard");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // Form / input validation
