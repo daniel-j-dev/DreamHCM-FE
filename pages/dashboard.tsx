@@ -1,17 +1,22 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 
+// Component imports
+import PrivateRoute from "../components/PrivateRoute";
+
 const Dashboard: NextPage = () => {
   return (
-    <div>
-      <Head>
-        <title>DreamHCM - Dashboard</title>
-      </Head>
+    <PrivateRoute>
+      <div>
+        <Head>
+          <title>DreamHCM - Dashboard</title>
+        </Head>
 
-      <style>{`
+        <style>{`
  
-      `}</style>
-    </div>
+ `}</style>
+      </div>
+    </PrivateRoute>
   );
 };
 

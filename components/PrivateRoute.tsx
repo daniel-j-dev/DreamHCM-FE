@@ -1,11 +1,8 @@
-import "../styles/normalize.css";
-import "../styles/globals.css";
-import type { AppProps } from "next/app";
 import { useEffect } from "react";
 import useStore from "../state/store";
 import { useRouter } from "next/router";
 
-function MyApp({ Component, pageProps }: AppProps) {
+const PrivateRoute = ({ children }: any) => {
   // State
   const user = useStore((state) => state.user);
   const setUser = useStore((state) => state.setUser);
@@ -13,7 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   // Setup router
   const router = useRouter();
 
-  // Add user data from localStorage to state on component mount
+  // If user isn't logged in, redirect to signin / signup page
   useEffect(() => {
     // Skip if user data is already in state
     if (user?.token?.length > 0) return;
@@ -24,13 +21,18 @@ function MyApp({ Component, pageProps }: AppProps) {
         localStorage.getItem("user") || JSON.stringify(user)
       );
 
+      // Save data to state
       setUser(savedUser);
+      return;
+    }
 
-      router.push("/dashboard");
+    // Otherwise, redirect to sign in / sign up page
+    if (!user?.token || user?.token?.length < 1) {
+      router.push("/");
     }
   }, []);
 
-  return <Component {...pageProps} />;
-}
+  return <>{children}</>;
+};
 
-export default MyApp;
+export default PrivateRoute;

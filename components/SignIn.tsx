@@ -4,13 +4,37 @@ import { BaseSyntheticEvent } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { signIn } from "../api/index";
+import { signIn } from "../api/users";
+import useStore from "../state/store";
+import { useRouter } from "next/router";
 
 const SignIn: NextPage = () => {
+  // State
+  const setUser = useStore((state) => state.setUser);
+
+  // Setup router
+  const router = useRouter();
+
   // Functions
   const onSubmit = (v: Object, e: BaseSyntheticEvent | undefined) => {
     e?.preventDefault();
-    signIn(v);
+
+    // Sign in
+    signIn(v)
+      .then((res: any) => {
+        // Add token to localStorage and state
+        localStorage.setItem(
+          "user",
+          JSON.stringify({ user: { token: res.data } })
+        );
+        setUser({ token: res.data });
+
+        // Redirect to dashboard
+        router.push("/dashboard");
+      })
+      .catch((err: any) => {
+        console.log(err);
+      });
   };
 
   // Form / input validation
