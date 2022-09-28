@@ -104,7 +104,7 @@ const TMEdit = ({ setShowModal, memberData }: any) => {
         ) : (
           <></>
         )}
-        <button>Update</button>
+        <button className="actionBtns">Update</button>
       </form>
 
       <style>{`

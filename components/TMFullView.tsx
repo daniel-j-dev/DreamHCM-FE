@@ -41,10 +41,14 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
         {editing ? (
           <TMEdit setShowModal={setEditing} memberData={memberData} />
         ) : (
-          <>
-            <button onClick={() => handleDelete()}>Delete</button>
-            <button onClick={() => setEditing(true)}>Edit</button>
-          </>
+          <div className="actions">
+            <button className="actionBtns" onClick={() => handleDelete()}>
+              Delete
+            </button>
+            <button className="actionBtns" onClick={() => setEditing(true)}>
+              Edit
+            </button>
+          </div>
         )}
       </div>
       <style>{`
@@ -83,6 +87,22 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
         .closeBtn {
         align-self: start;
     }
+
+    .actions {
+      display: flex;
+      
+    }
+
+    .actionBtns {
+      width: 55px;
+      height: 25px;
+
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+
  `}</style>
     </div>
   );
