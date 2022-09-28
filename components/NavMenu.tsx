@@ -40,7 +40,7 @@ const NavMenu = ({ setShowNav }: any) => {
         flex-direction: column;
 
 
-        box-shadow: 0px 0px 6px #2185D5;
+        box-shadow: 0px 0px 4px black;
     }
 
     .upperNav {

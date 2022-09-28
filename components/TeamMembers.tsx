@@ -29,15 +29,24 @@ const TeamMembers = () => {
   // JSX
   return (
     <div className="tm">
-      <h3>Team Members ({teamMembers.length})</h3>
-      <div className="tmList">
-        {teamMembers?.map((e: any, i: Number) => (
-          <TeamMemberCard key={`tm${i}`} tmData={e} />
-        ))}
+      <div className="tmInner">
+        <h3>Team Members ({teamMembers.length})</h3>
+        <div className="tmList">
+          {teamMembers?.map((e: any, i: Number) => (
+            <TeamMemberCard key={`tm${i}`} tmData={e} />
+          ))}
+        </div>
       </div>
       <style>{`
-      .tmList {
+      .tm {
         width: 100%;
+
+        display: flex;
+        justify-content: center;
+      }
+
+      .tmList {
+          width: 100%;
           display: flex;
           flex-direction: column;
           align-items: center;

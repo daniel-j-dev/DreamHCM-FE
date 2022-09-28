@@ -26,6 +26,8 @@ const TeamMemberCard = ({ tmData }: any) => {
         flex-direction: row;
         justify-content: space-around;
         align-content: center;
+        background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+
     }
 
     .tmInfo {
