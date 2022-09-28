@@ -1,7 +1,7 @@
 // Modal that displays various information about a Team Member
 // ...along with inputs for related CRUD operations
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import closeIcon from "../assets/close_icon.svg";
 import useStore from "../state/store";
 import TMEdit from "./TMEdit";
@@ -38,19 +38,13 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
           />
         </button>
 
-        {!editing ? (
+        {editing ? (
+          <TMEdit setShowModal={setEditing} memberData={memberData} />
+        ) : (
           <>
             <button onClick={() => handleDelete()}>Delete</button>
             <button onClick={() => setEditing(true)}>Edit</button>
           </>
-        ) : (
-          <></>
-        )}
-
-        {editing ? (
-          <TMEdit setShowModal={setEditing} memberData={memberData} />
-        ) : (
-          <></>
         )}
       </div>
       <style>{`

@@ -71,6 +71,7 @@ const TMEdit = ({ setShowModal, memberData }: any) => {
         <input
           type="text"
           placeholder="Name"
+          defaultValue={memberData.name}
           {...register("name", { required: true })}
         />
         {/* Name input error messages */}
@@ -82,6 +83,7 @@ const TMEdit = ({ setShowModal, memberData }: any) => {
         <input
           type="text"
           placeholder="Current position"
+          defaultValue={memberData.currentPosition}
           {...register("currentPosition", { required: true })}
         />
         {/* Current position input error messages */}
@@ -93,6 +95,7 @@ const TMEdit = ({ setShowModal, memberData }: any) => {
         <input
           type="number"
           placeholder="Annual pay"
+          defaultValue={memberData.pay}
           {...register("pay", { required: true })}
         />
         {/* Pay input error messages */}
