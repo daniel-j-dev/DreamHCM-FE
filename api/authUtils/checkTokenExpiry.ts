@@ -1,13 +1,13 @@
 import isJwtTokenExpired from "jwt-check-expiry";
+import getToken from "./getToken";
 
 const checkTokenExpiry = () => {
   // Check if token is saved in localStorage
-  const userString = localStorage.getItem("user") || null;
-  if (!userString) return;
+  const token = getToken();
+  if (token === "") return;
 
   try {
     // Check if token is expired
-    const { token } = JSON.parse(userString);
     if (!isJwtTokenExpired(token)) return;
     // If it is expired, clear localStorage...
     localStorage.clear();

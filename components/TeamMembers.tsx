@@ -18,11 +18,8 @@ const TeamMembers = () => {
 
   //Save team members into state on load
   useEffect(() => {
-    // Skip network requests if state hasn't loaded yet
-    if (!user?.token || user.token.length < 1) return;
-
     // Get all teamMembers
-    getAllTeamMembers(user.token)
+    getAllTeamMembers()
       .then((foundMembers: any) => {
         setTeamMembers(foundMembers.data);
       })
@@ -45,7 +42,7 @@ const TeamMembers = () => {
           </button>
         </div>
         <div className="tmList">
-          {teamMembers?.map((e: any, i: Number) => (
+          {teamMembers.map((e: any, i: Number) => (
             <TeamMemberCard key={`tm${i}`} tmData={e} />
           ))}
         </div>

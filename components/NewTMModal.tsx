@@ -5,11 +5,37 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import closeIcon from "../assets/close_icon.svg";
+import { createTeamMember, getAllTeamMembers } from "../api/teamMembers";
+import useStore from "../state/store";
 
 const NewTMModal = ({ setShowNewTMM }: any) => {
+  // State
+  const setTeamMembers = useStore((state) => state.setTeamMembers);
+
   // Function(s)
-  const onSubmit = (v: Object, e: BaseSyntheticEvent | undefined) => {
+  const onSubmit = async (v: any, e: BaseSyntheticEvent | undefined) => {
     e?.preventDefault();
+
+    // Format team member object
+    const newMember = {
+      ...v,
+      payType: "Salary",
+      hireDate: Date.now(),
+    };
+
+    try {
+      // Create
+      await createTeamMember(newMember);
+
+      // Close modal & refetch teamMembers
+      setShowNewTMM(false);
+
+      const mems = await getAllTeamMembers();
+
+      setTeamMembers(mems.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // Form / input validation
