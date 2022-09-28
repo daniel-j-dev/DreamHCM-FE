@@ -1,4 +1,5 @@
 import axios from "axios";
+import checkTokenExpiry from "./authUtils/checkTokenExpiry";
 
 // Check for backend URL
 if (!process?.env?.NEXT_PUBLIC_BACKEND_URL)
@@ -6,6 +7,7 @@ if (!process?.env?.NEXT_PUBLIC_BACKEND_URL)
 
 // Get all team members
 export const getAllTeamMembers = (token: any) => {
+  checkTokenExpiry();
   return axios.get(process.env.NEXT_PUBLIC_BACKEND_URL + "/teammember", {
     headers: { authorization: token },
   });
