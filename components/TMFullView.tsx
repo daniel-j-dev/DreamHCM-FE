@@ -31,6 +31,9 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
   useEffect(() => {
     getPayments(memberData._id)
       .then((foundPayments) => {
+        // Sort data (by most recent?)
+        foundPayments.data.reverse();
+        // Set state
         setPayments(foundPayments.data);
       })
       .catch((error) => {
@@ -64,13 +67,15 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
               </span>
             </div>
 
-            <span>Payments ({payments.length})</span>
-            <div className="paymentsScroll">
-              {payments.map((e: any, i: number) => (
-                <span key={"payment" + i}>{`${new Date(
-                  e.dateAdded
-                ).toLocaleDateString()} - $${e.payAmount}`}</span>
-              ))}
+            <div className="paymentsWrap">
+              <span>Payments ({payments.length})</span>
+              <div className="paymentsScroll">
+                {payments.map((e: any, i: number) => (
+                  <span className="payments" key={"payment" + i}>{`${new Date(
+                    e.dateAdded
+                  ).toLocaleDateString()} - $${e.payAmount}`}</span>
+                ))}
+              </div>
             </div>
 
             <div className="actions">
@@ -152,8 +157,19 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
 
     }
 
+    .paymentsWrap {
+      display: flex;
+      flex-direction: column;
+
+      margin-top: 15px;
+    }
+
     .paymentsScroll {
+      height: 50px;
       overflow-y:auto;
+
+      display: flex;
+      flex-direction: column;
     }
 
  `}</style>
