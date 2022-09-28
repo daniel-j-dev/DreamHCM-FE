@@ -41,13 +41,23 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
         {editing ? (
           <TMEdit setShowModal={setEditing} memberData={memberData} />
         ) : (
-          <div className="actions">
-            <button className="actionBtns" onClick={() => handleDelete()}>
-              Delete
-            </button>
-            <button className="actionBtns" onClick={() => setEditing(true)}>
-              Edit
-            </button>
+          <div>
+            <div className="memberDetails">
+              <span>Name: {memberData.name}</span>
+              <span>Position: {memberData.currentPosition}</span>
+              <span>Salary: {memberData.pay}</span>
+              <span>
+                Date hired: {new Date(memberData.hireDate).toLocaleDateString()}
+              </span>
+            </div>
+            <div className="actions">
+              <button className="actionBtns" onClick={() => handleDelete()}>
+                Delete
+              </button>
+              <button className="actionBtns" onClick={() => setEditing(true)}>
+                Edit
+              </button>
+            </div>
           </div>
         )}
       </div>
@@ -89,7 +99,10 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
     }
 
     .actions {
+      width: 100%;
       display: flex;
+      justify-content: center;
+      margin-top: 15px;
       
     }
 
@@ -101,6 +114,19 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
 
       margin-left: 5px;
       margin-right: 5px;
+    }
+
+    .memberDetails {
+      width: 100%;
+      height: 100%;
+
+      padding-left: 15px;
+      padding-right: 15px;
+      display: flex;
+      flex-direction: column;
+
+      //flex-wrap: wrap;
+
     }
 
  `}</style>
