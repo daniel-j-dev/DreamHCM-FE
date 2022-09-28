@@ -51,6 +51,8 @@ const TeamMembers = () => {
 
         display: flex;
         justify-content: center;
+
+        margin-top: 50px;
       }
 
       .tmList {

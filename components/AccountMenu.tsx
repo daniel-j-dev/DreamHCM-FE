@@ -24,7 +24,7 @@ const AccountMenu = () => {
       <button onClick={(e) => handleSignOut(e)}>Sign out</button>
       <style>{`
     .accMenu {
-        position: absolute;
+        position: fixed;
         right: 0px;
         width: 100px;
         height: 50px;

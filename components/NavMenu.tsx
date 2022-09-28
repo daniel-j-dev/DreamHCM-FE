@@ -24,7 +24,7 @@ const NavMenu = ({ setShowNav }: any) => {
       </div>
       <style>{`
     .navMenu {
-        position: absolute;
+        position: fixed;
         width: 208px;
         height: 250px;
         background-color: white;

@@ -36,6 +36,12 @@ const Header: NextPage = () => {
         </button>
         <style>{`
       .header {
+        position: fixed;
+        top: 0px;
+        z-index: 100;
+
+        background-color: white;
+
           width: 100%;
           height: 50px;
           
