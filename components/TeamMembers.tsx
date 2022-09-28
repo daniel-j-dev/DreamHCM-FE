@@ -24,12 +24,16 @@ const TeamMembers = () => {
     getAllTeamMembers()
       .then((foundMembers: any) => {
         setTeamMembers(foundMembers.data);
-        setFilteredTM(foundMembers.data);
       })
       .catch((err: any) => {
         console.log(err);
       });
   }, [user]);
+
+  // Update filteredTM when teamMembers updates
+  useEffect(() => {
+    setFilteredTM(teamMembers);
+  }, [teamMembers]);
 
   // Function(s)
   const searchTeamMembers = (e: any) => {
