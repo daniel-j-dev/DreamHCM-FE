@@ -29,10 +29,10 @@ const TeamMembers = () => {
   // JSX
   return (
     <div className="tm">
-      <h3>Team Members</h3>
+      <h3>Team Members ({teamMembers.length})</h3>
       <div className="tmList">
         {teamMembers?.map((e: any, i: Number) => (
-          <TeamMemberCard key={`tm${i}`} />
+          <TeamMemberCard key={`tm${i}`} tmData={e} />
         ))}
       </div>
       <style>{`
