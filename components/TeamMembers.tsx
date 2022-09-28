@@ -14,6 +14,8 @@ const TeamMembers = () => {
   const teamMembers = useStore((state) => state.teamMembers);
   const setTeamMembers = useStore((state) => state.setTeamMembers);
 
+  const [filteredTM, setFilteredTM] = useState([...teamMembers]); // Team members found using the search bar
+
   const [showNewTMM, setShowNewTMM] = useState(false); // Show new team member modal
 
   //Save team members into state on load
@@ -22,11 +24,23 @@ const TeamMembers = () => {
     getAllTeamMembers()
       .then((foundMembers: any) => {
         setTeamMembers(foundMembers.data);
+        setFilteredTM(foundMembers.data);
       })
       .catch((err: any) => {
         console.log(err);
       });
   }, [user]);
+
+  // Function(s)
+  const searchTeamMembers = (e: any) => {
+    const searchString = e.target.value.toLowerCase();
+    let result = [];
+
+    for (let m of teamMembers)
+      if (m.name.toLowerCase().includes(searchString)) result.push(m);
+
+    setFilteredTM(result);
+  };
 
   // JSX
   return (
@@ -34,15 +48,19 @@ const TeamMembers = () => {
       {showNewTMM ? <TMCreate setShowNewTMM={setShowNewTMM} /> : <></>}
 
       <div className="tmInner">
-        <h3>Team Members ({teamMembers.length})</h3>
+        <h3>Team Members ({filteredTM.length})</h3>
         <div className="tmControls">
-          <input className="tmSearch" placeholder="Search for a member" />
+          <input
+            className="tmSearch"
+            placeholder="Search for a member"
+            onChange={(e) => searchTeamMembers(e)}
+          />
           <button className="newTMBtn" onClick={() => setShowNewTMM(true)}>
             <Image src={plusIcon} alt="Plus icon" height={20} width={20} />
           </button>
         </div>
         <div className="tmList">
-          {teamMembers.map((e: any, i: Number) => (
+          {filteredTM.map((e: any, i: Number) => (
             <TeamMemberCard key={`tm${i}`} tmData={e} />
           ))}
         </div>
