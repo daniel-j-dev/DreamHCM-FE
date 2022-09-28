@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Image from "next/image";
 import navMenuImg from "../assets/hamburger-menu.svg";
+import userIcon from "../assets/user_icon.svg";
 
 const Header: NextPage = () => {
   return (
@@ -11,7 +12,9 @@ const Header: NextPage = () => {
       <span className="brandName">
         Dream<span className="brandHCM">HCM</span>
       </span>
-      <button>Account</button>
+      <button>
+        <Image src={userIcon} height={25} width={25} />
+      </button>
       <style>{`
       .header {
           width: 100%;
