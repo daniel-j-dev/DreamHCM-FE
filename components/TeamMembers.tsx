@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import useStore from "../state/store";
 import { getAllTeamMembers } from "../api/teamMembers";
+import Image from "next/image";
+import plusIcon from "../assets/plus.svg";
 
 // Component imports
 import TeamMemberCard from "./TeamMemberCard";
@@ -31,6 +33,12 @@ const TeamMembers = () => {
     <div className="tm">
       <div className="tmInner">
         <h3>Team Members ({teamMembers.length})</h3>
+        <div className="tmControls">
+          <input className="tmSearch" placeholder="Search for a member" />
+          <button className="newTMBtn">
+            <Image src={plusIcon} alt="Plus icon" height={20} width={20} />
+          </button>
+        </div>
         <div className="tmList">
           {teamMembers?.map((e: any, i: Number) => (
             <TeamMemberCard key={`tm${i}`} tmData={e} />
@@ -50,6 +58,35 @@ const TeamMembers = () => {
           display: flex;
           flex-direction: column;
           align-items: center;
+      }
+
+      .tmControls {
+        display: flex;
+        justify-content: space-between;
+
+        margin-bottom: 20px;
+      }
+
+      .tmSearch {
+        border-radius: 50px;
+
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+
+        padding: 8px;
+        font-size: 18px;
+      }
+
+      .newTMBtn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 35px;
+        height: 35px;
+
+        border-radius: 50px;
+
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
       }
    `}</style>
     </div>

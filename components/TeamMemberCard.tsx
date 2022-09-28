@@ -17,8 +17,8 @@ const TeamMemberCard = ({ tmData }: any) => {
     .tmCard {
         width: 300px;
         height: 149px;
-        //border-radius: 20px;
-        box-shadow: 0px 0px 2px black;
+
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
 
         margin-bottom: 20px;
 

@@ -30,4 +30,5 @@ https://colorhunt.co/palette/2185d53a4750303841f3f3f3
 - Magnifying glass icon: https://www.cleanpng.com/png-magnifying-glass-computer-icons-magnification-clip-2151892/
 - Profile icon: https://www.iconfinder.com/icons/928429/account_customer_profile_user_icon
 - Close menu icon: https://www.iconfinder.com/icons/211652/close_icon
+- Plus icon: https://www.svgrepo.com/svg/166655/plus
 - Navigation menu icon: I made it with Figma
