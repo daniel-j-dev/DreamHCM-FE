@@ -18,3 +18,13 @@ export const getPayments = (id: string) => {
     headers: { authorization: token },
   });
 };
+
+// Create a new payment
+export const createPayment = (payment: any) => {
+  checkTokenExpiry();
+  const token = getToken();
+
+  return axios.post(baseURL + "/payment", payment, {
+    headers: { authorization: token },
+  });
+};

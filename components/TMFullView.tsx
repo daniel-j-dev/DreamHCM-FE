@@ -7,11 +7,14 @@ import useStore from "../state/store";
 import TMEdit from "./TMEdit";
 import { deleteTeamMember, getAllTeamMembers } from "../api/teamMembers";
 import { getPayments } from "../api/payments";
+import TMPay from "./TMPay";
 
 const TMFullView = ({ setShowModal, memberData }: any) => {
   // State
   const setTeamMembers = useStore((state) => state.setTeamMembers);
-  const [editing, setEditing] = useState(false); // True if you clicked the "edit" button
+  const [editing, setEditing] = useState(false); // True if user clicked the "Edit" button
+  const [paying, setPaying] = useState(false); // True if user clicked the "Pay" button
+
   const [payments, setPayments] = useState([]); // payments being fetched from DB by user ID
 
   // Functions
@@ -57,6 +60,20 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
         {editing ? (
           <TMEdit setShowModal={setEditing} memberData={memberData} />
         ) : (
+          <></>
+        )}
+
+        {paying ? (
+          <TMPay
+            setShowModal={setPaying}
+            setPayments={setPayments}
+            memberData={memberData}
+          />
+        ) : (
+          <></>
+        )}
+
+        {!editing && !paying ? (
           <div>
             <div className="memberDetails">
               <span>Name: {memberData.name}</span>
@@ -85,8 +102,13 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
               <button className="actionBtns" onClick={() => setEditing(true)}>
                 Edit
               </button>
+              <button className="actionBtns" onClick={() => setPaying(true)}>
+                Pay
+              </button>
             </div>
           </div>
+        ) : (
+          <></>
         )}
       </div>
       <style>{`
