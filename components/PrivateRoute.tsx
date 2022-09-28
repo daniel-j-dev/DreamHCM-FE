@@ -12,24 +12,20 @@ const PrivateRoute = ({ children }: any) => {
 
   // If user isn't logged in, redirect to signin / signup page
   useEffect(() => {
-    // Skip if user data is already in state
-    if (user?.token?.length > 0) return;
+    // Skip the logic below if already logged in
+    if (user.token.length > 0) return;
 
-    // If user data exists in localStorage...
-    if ("user" in window.localStorage) {
-      const savedUser = JSON.parse(
-        localStorage.getItem("user") || JSON.stringify(user)
-      );
+    // If user data is in localStorage, save it to state.
+    if ("user" in localStorage) {
+      const savedUser = localStorage.getItem("user");
 
-      // Save data to state
-      setUser(savedUser);
+      setUser(JSON.parse(savedUser || ""));
+
       return;
     }
 
     // Otherwise, redirect to sign in / sign up page
-    if (!user?.token || user?.token?.length < 1) {
-      router.push("/");
-    }
+    router.push("/");
   }, []);
 
   return <>{children}</>;

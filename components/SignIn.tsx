@@ -23,10 +23,7 @@ const SignIn: NextPage = () => {
     signIn(v)
       .then((res: any) => {
         // Add token to localStorage and state
-        localStorage.setItem(
-          "user",
-          JSON.stringify({ user: { token: res.data } })
-        );
+        localStorage.setItem("user", JSON.stringify({ token: res.data }));
         setUser({ token: res.data });
 
         // Redirect to dashboard

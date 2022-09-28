@@ -4,6 +4,7 @@ import Head from "next/head";
 // Component imports
 import PrivateRoute from "../components/PrivateRoute";
 import Header from "../components/Header";
+import TeamMembers from "../components/TeamMembers";
 
 const Dashboard: NextPage = () => {
   return (
@@ -14,6 +15,8 @@ const Dashboard: NextPage = () => {
         </Head>
 
         <Header />
+
+        <TeamMembers />
 
         <style>{`
   .dashboardWrap {

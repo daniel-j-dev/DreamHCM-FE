@@ -7,6 +7,8 @@ interface StoreType {
     token: string;
   };
   setUser: (newUser: any) => void;
+  teamMembers: any;
+  setTeamMembers: (newMember: any) => void;
 }
 
 const useStore = create<StoreType>((set: Function) => ({
@@ -15,6 +17,10 @@ const useStore = create<StoreType>((set: Function) => ({
   },
   setUser: (newUser: any) => {
     set(() => ({ user: newUser }));
+  },
+  teamMembers: [],
+  setTeamMembers: (newMember: any) => {
+    set(() => ({ teamMembers: newMember }));
   },
 }));
 
