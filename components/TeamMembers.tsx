@@ -88,6 +88,26 @@ const TeamMembers = () => {
 
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
       }
+
+      @media only screen and (min-width: 650px) {
+        .tmInner {
+            width: 650px;
+        }
+
+        .tmList {
+            flex-direction: row;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .tmControls {
+            justify-content: start;
+        }
+
+        .tmSearch {
+            margin-right: 30px;
+        }
+      }
    `}</style>
     </div>
   );
