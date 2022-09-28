@@ -6,10 +6,12 @@ import { useState } from "react";
 
 // Component imports
 import NavMenu from "./NavMenu";
+import AccountMenu from "./AccountMenu";
 
 const Header: NextPage = () => {
   // State
   const [showNav, setShowNav] = useState(false);
+  const [showAccMenu, setShowAccMenu] = useState(false);
 
   // JSX
   return (
@@ -28,7 +30,9 @@ const Header: NextPage = () => {
             height={25}
             width={25}
             alt="Account menu icon."
+            onClick={() => setShowAccMenu(!showAccMenu)}
           />
+          {showAccMenu ? <AccountMenu /> : <></>}
         </button>
         <style>{`
       .header {
