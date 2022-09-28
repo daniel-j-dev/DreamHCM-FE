@@ -37,3 +37,14 @@ export const updateTeamMember = (updatedMember: any) => {
     headers: { authorization: token },
   });
 };
+
+// Delete a team member
+export const deleteTeamMember = (_id: string) => {
+  checkTokenExpiry();
+  const token = getToken();
+
+  return axios.delete(baseURL + "/teammember", {
+    data: { _id: _id },
+    headers: { Authorization: token },
+  });
+};

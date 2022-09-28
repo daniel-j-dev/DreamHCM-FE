@@ -1,15 +1,29 @@
 // Modal that displays various information about a Team Member
 // ...along with inputs for related CRUD operations
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import closeIcon from "../assets/close_icon.svg";
 import useStore from "../state/store";
 import TMEdit from "./TMEdit";
+import { deleteTeamMember, getAllTeamMembers } from "../api/teamMembers";
 
 const TMFullView = ({ setShowModal, memberData }: any) => {
   // State
   const setTeamMembers = useStore((state) => state.setTeamMembers);
-  const [editing, setEditing] = useState(true); // True if you clicked the "edit" button
+  const [editing, setEditing] = useState(false); // True if you clicked the "edit" button
+
+  // Functions
+  const handleDelete = async () => {
+    // Delete team member
+    await deleteTeamMember(memberData._id);
+
+    // Close modal & refresh teamMembers list in state
+    setShowModal(false);
+
+    const mems = await getAllTeamMembers();
+
+    setTeamMembers(mems.data);
+  };
 
   // JSX
   return (
@@ -23,8 +37,18 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
             height={25}
           />
         </button>
+
+        {!editing ? (
+          <>
+            <button onClick={() => handleDelete()}>Delete</button>
+            <button onClick={() => setEditing(true)}>Edit</button>
+          </>
+        ) : (
+          <></>
+        )}
+
         {editing ? (
-          <TMEdit setShowModal={setShowModal} memberData={memberData} />
+          <TMEdit setShowModal={setEditing} memberData={memberData} />
         ) : (
           <></>
         )}
