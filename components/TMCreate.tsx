@@ -8,7 +8,7 @@ import closeIcon from "../assets/close_icon.svg";
 import { createTeamMember, getAllTeamMembers } from "../api/teamMembers";
 import useStore from "../state/store";
 
-const NewTMModal = ({ setShowNewTMM }: any) => {
+const TMCreate = ({ setShowNewTMM }: any) => {
   // State
   const setTeamMembers = useStore((state) => state.setTeamMembers);
 
@@ -126,6 +126,9 @@ const NewTMModal = ({ setShowNewTMM }: any) => {
         height: 100%;
 
         top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
 
         z-index: 300;
 
@@ -176,4 +179,4 @@ const NewTMModal = ({ setShowNewTMM }: any) => {
   );
 };
 
-export default NewTMModal;
+export default TMCreate;

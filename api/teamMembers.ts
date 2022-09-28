@@ -27,3 +27,13 @@ export const createTeamMember = (newMember: any) => {
     headers: { authorization: token },
   });
 };
+
+// Update a team member
+export const updateTeamMember = (updatedMember: any) => {
+  checkTokenExpiry();
+  const token = getToken();
+
+  return axios.put(baseURL + "/teammember", updatedMember, {
+    headers: { authorization: token },
+  });
+};

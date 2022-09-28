@@ -6,7 +6,7 @@ import plusIcon from "../assets/plus.svg";
 
 // Component imports
 import TeamMemberCard from "./TeamMemberCard";
-import NewTMModal from "./NewTMModal";
+import TMCreate from "./TMCreate";
 
 const TeamMembers = () => {
   // State
@@ -31,7 +31,7 @@ const TeamMembers = () => {
   // JSX
   return (
     <div className="tm">
-      {showNewTMM ? <NewTMModal setShowNewTMM={setShowNewTMM} /> : <></>}
+      {showNewTMM ? <TMCreate setShowNewTMM={setShowNewTMM} /> : <></>}
 
       <div className="tmInner">
         <h3>Team Members ({teamMembers.length})</h3>
