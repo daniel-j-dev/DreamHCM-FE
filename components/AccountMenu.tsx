@@ -32,7 +32,7 @@ const AccountMenu = () => {
 
         z-index: 9999;
 
-        border-radius: 20px;
+        //border-radius: 20px;
 
         display: flex;
         align-items: center;

@@ -26,14 +26,13 @@ const NavMenu = ({ setShowNav }: any) => {
     .navMenu {
         position: absolute;
         width: 208px;
-        height: 414px;
+        height: 250px;
         background-color: white;
-
 
 
         z-index: 9999;
 
-        border-radius: 0px 0px 20px 0px;
+        //border-radius: 0px 0px 20px 0px;
 
         display: flex;
         align-items: center;
