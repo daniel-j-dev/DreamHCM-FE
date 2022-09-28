@@ -1,16 +1,18 @@
 // Modal that displays various information about a Team Member
 // ...along with inputs for related CRUD operations
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import closeIcon from "../assets/close_icon.svg";
 import useStore from "../state/store";
 import TMEdit from "./TMEdit";
 import { deleteTeamMember, getAllTeamMembers } from "../api/teamMembers";
+import { getPayments } from "../api/payments";
 
 const TMFullView = ({ setShowModal, memberData }: any) => {
   // State
   const setTeamMembers = useStore((state) => state.setTeamMembers);
   const [editing, setEditing] = useState(false); // True if you clicked the "edit" button
+  const [payments, setPayments] = useState([]); // payments being fetched from DB by user ID
 
   // Functions
   const handleDelete = async () => {
@@ -24,6 +26,17 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
 
     setTeamMembers(mems.data);
   };
+
+  // Fetch payments on component mount
+  useEffect(() => {
+    getPayments(memberData._id)
+      .then((foundPayments) => {
+        setPayments(foundPayments.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   // JSX
   return (
@@ -50,6 +63,16 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
                 Date hired: {new Date(memberData.hireDate).toLocaleDateString()}
               </span>
             </div>
+
+            <span>Payments ({payments.length})</span>
+            <div className="paymentsScroll">
+              {payments.map((e: any, i: number) => (
+                <span key={"payment" + i}>{`${new Date(
+                  e.dateAdded
+                ).toLocaleDateString()} - $${e.payAmount}`}</span>
+              ))}
+            </div>
+
             <div className="actions">
               <button className="actionBtns" onClick={() => handleDelete()}>
                 Delete
@@ -85,7 +108,7 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
           width: 300px;
           padding-bottom: 20px;
           
-          background-color: white;
+          background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
           
           box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
           
@@ -127,6 +150,10 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
 
       //flex-wrap: wrap;
 
+    }
+
+    .paymentsScroll {
+      overflow-y:auto;
     }
 
  `}</style>
