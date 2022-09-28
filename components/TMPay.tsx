@@ -4,11 +4,9 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createPayment, getPayments } from "../api/payments";
-import useStore from "../state/store";
 
 const TMPay = ({ setShowModal, memberData, setPayments }: any) => {
   // State
-  const setTeamMembers = useStore((state) => state.setTeamMembers);
   const [payMods, setPayMods] = useState([]); // Pay modifications
 
   // Function(s)
