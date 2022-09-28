@@ -69,7 +69,7 @@ const NewTMModal = ({ setShowNewTMM }: any) => {
   return (
     <div className="modalOuter">
       <div className="modalInner">
-        <button onClick={() => setShowNewTMM(false)}>
+        <button className="closeBtn" onClick={() => setShowNewTMM(false)}>
           <Image
             src={closeIcon}
             alt="Close modal menu icon."
@@ -77,6 +77,9 @@ const NewTMModal = ({ setShowNewTMM }: any) => {
             height={25}
           />
         </button>
+
+        <h3>Add a team member</h3>
+
         <form
           onSubmit={handleSubmit((values, event) => onSubmit(values, event))}
         >
@@ -135,10 +138,34 @@ const NewTMModal = ({ setShowNewTMM }: any) => {
 
       .modalInner {
         width: 300px;
-        height: 300px;
+        padding-bottom: 20px;
+
         background-color: white;
 
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .closeBtn {
+        align-self: start;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      input {
+        margin-bottom: 15px;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        padding: 8px;
+        font-size: 18px;
+
+        width: 250px;
       }
 
       .error {
