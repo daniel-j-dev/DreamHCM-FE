@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useStore from "../state/store";
 import { getAllTeamMembers } from "../api/teamMembers";
 import Image from "next/image";
@@ -6,12 +6,15 @@ import plusIcon from "../assets/plus.svg";
 
 // Component imports
 import TeamMemberCard from "./TeamMemberCard";
+import NewTMModal from "./NewTMModal";
 
 const TeamMembers = () => {
   // State
   const user = useStore((state) => state.user);
   const teamMembers = useStore((state) => state.teamMembers);
   const setTeamMembers = useStore((state) => state.setTeamMembers);
+
+  const [showNewTMM, setShowNewTMM] = useState(false); // Show new team member modal
 
   //Save team members into state on load
   useEffect(() => {
@@ -31,11 +34,13 @@ const TeamMembers = () => {
   // JSX
   return (
     <div className="tm">
+      {showNewTMM ? <NewTMModal setShowNewTMM={setShowNewTMM} /> : <></>}
+
       <div className="tmInner">
         <h3>Team Members ({teamMembers.length})</h3>
         <div className="tmControls">
           <input className="tmSearch" placeholder="Search for a member" />
-          <button className="newTMBtn">
+          <button className="newTMBtn" onClick={() => setShowNewTMM(true)}>
             <Image src={plusIcon} alt="Plus icon" height={20} width={20} />
           </button>
         </div>

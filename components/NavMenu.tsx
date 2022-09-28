@@ -30,7 +30,7 @@ const NavMenu = ({ setShowNav }: any) => {
         background-color: white;
 
 
-        z-index: 9999;
+        z-index: 200;
 
         //border-radius: 0px 0px 20px 0px;
 

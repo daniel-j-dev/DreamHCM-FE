@@ -30,7 +30,7 @@ const AccountMenu = () => {
         height: 50px;
         background-color: white;
 
-        z-index: 9999;
+        z-index: 200;
 
         //border-radius: 20px;
 
