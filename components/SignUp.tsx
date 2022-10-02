@@ -1,6 +1,6 @@
 // Imports
 import type { NextPage } from "next";
-import { BaseSyntheticEvent } from "react";
+import { BaseSyntheticEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 const SignUp: NextPage = () => {
   // State
   const setUser = useStore((state) => state.setUser);
+  const [submitError, setSubmitError] = useState(""); // Errors from backend when attempting signup
 
   // Setup router
   const router = useRouter();
@@ -36,8 +37,9 @@ const SignUp: NextPage = () => {
 
       // Redirect to /dashboard
       router.push("/dashboard");
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      setSubmitError(error.response.data);
     }
   };
 
@@ -111,6 +113,7 @@ const SignUp: NextPage = () => {
       )}
 
       <button className="submitBtn">Sign up</button>
+      <span className="submitError">{submitError}</span>
       <style>{`
             .inputForm {
               display: flex;
@@ -152,6 +155,11 @@ const SignUp: NextPage = () => {
                 align-self: start;
 
                 margin-bottom: 15px;
+            }
+
+            .submitError {
+              color: red;
+              margin-top: 15px;
             }
           `}</style>
     </form>
