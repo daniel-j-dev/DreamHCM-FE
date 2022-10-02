@@ -31,10 +31,7 @@ const SignUp: NextPage = () => {
       const createdUser = await signIn(newUser);
 
       // Add token to localStorage and state
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ user: { token: createdUser.data } })
-      );
+      localStorage.setItem("user", JSON.stringify({ token: createdUser.data }));
       setUser({ token: createdUser.data });
 
       // Redirect to /dashboard
