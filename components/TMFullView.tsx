@@ -204,16 +204,18 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
         }
         
       .modalInner {
-          width: 300px;
-          padding-bottom: 20px;
-          
-          background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-          
-          box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
-          
-          display: flex;
-          flex-direction: column;
-          align-items: center;
+        width: 300px;
+        padding-bottom: 20px;
+        
+        background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+        
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        border-radius: 10px;
         }
         
         .closeBtn {
@@ -261,10 +263,17 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
     }
 
     .paymentsWrap {
+
+      width: 250px;
+
       display: flex;
       flex-direction: column;
 
-      margin-top: 15px;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+
+      padding: 10px;
+
+      border-radius: 10px;
     }
 
     .paymentsScroll {

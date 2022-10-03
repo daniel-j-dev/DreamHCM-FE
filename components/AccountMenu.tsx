@@ -32,15 +32,14 @@ const AccountMenu = () => {
 
         z-index: 200;
 
-        //border-radius: 20px;
-
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
 
-
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+
+        border-radius: 10px;
     }
 
     button {

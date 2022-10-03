@@ -150,6 +150,8 @@ const TMCreate = ({ setShowNewTMM }: any) => {
         display: flex;
         flex-direction: column;
         align-items: center;
+
+        border-radius: 10px;
       }
 
       .closeBtn {

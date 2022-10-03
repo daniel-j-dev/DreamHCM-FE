@@ -32,14 +32,13 @@ const NavMenu = ({ setShowNav }: any) => {
 
         z-index: 200;
 
-        //border-radius: 0px 0px 20px 0px;
-
         display: flex;
         align-items: center;
         flex-direction: column;
 
-
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+
+        border-radius: 10px;
     }
 
     .upperNav {
