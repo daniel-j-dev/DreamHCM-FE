@@ -48,11 +48,13 @@ const SignUp: NextPage = () => {
     email: yup
       .string()
       .required("An email address is required.")
-      .email("Provide a valid email address."),
+      .email("Provide a valid email address.")
+      .max(500, "Email must not exceed 500 characters."),
     password: yup
       .string()
       .required("A password is required.")
-      .min(6, "Password must be at least 6 characters."),
+      .min(6, "Password must be at least 6 characters.")
+      .max(500, "Password must not exceed 500 characters."),
     passwordConfirm: yup
       .string()
       .required("Please confirm your password.")
