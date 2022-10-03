@@ -81,10 +81,14 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
     // @ts-ignore
     if (workDays.hasOwnProperty(dateKey)) {
       // Remove key from DB...
-      deleteWorkDay(memberData._id, date);
-
-      // Fetch new schedule & update state
-      getMemberSchedule();
+      deleteWorkDay(memberData._id, date)
+        .then(() => {
+          // Fetch new schedule & update state
+          getMemberSchedule();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
       return;
     }
 
