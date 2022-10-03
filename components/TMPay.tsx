@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createPayment, getPayments } from "../api/payments";
+import { numToUSD } from "../utility/formatters";
 
 const TMPay = ({ setShowModal, memberData, setPayments }: any) => {
   // Estimated weekly pay
@@ -114,7 +115,7 @@ const TMPay = ({ setShowModal, memberData, setPayments }: any) => {
           <></>
         )}
 
-        <span className="totalPay">Total pay: ${adjPay}</span>
+        <span className="totalPay">Total pay: {numToUSD(adjPay)}</span>
         <button className="actionBtns">Submit</button>
       </form>
 
@@ -155,10 +156,9 @@ const TMPay = ({ setShowModal, memberData, setPayments }: any) => {
         <span>Applied adjustments ({payMods.length})</span>
         <div className="modScroll">
           {payMods.map((e: any, i: number) => (
-            <span
-              className="payments"
-              key={"payment" + i}
-            >{`${e.reason}: $${e.value}`}</span>
+            <span className="payments" key={"payment" + i}>{`${
+              e.reason
+            }: ${numToUSD(e.value)}`}</span>
           ))}
         </div>
       </div>

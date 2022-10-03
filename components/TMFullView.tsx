@@ -8,6 +8,7 @@ import { deleteTeamMember, getAllTeamMembers } from "../api/teamMembers";
 import { getPayments } from "../api/payments";
 import { getSchedule, createWorkDay, deleteWorkDay } from "../api/workDay";
 import Calendar from "react-calendar";
+import { numToUSD } from "../utility/formatters";
 
 // Component imports
 import TMEdit from "./TMEdit";
@@ -144,7 +145,7 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
             <div className="memberDetails">
               <span>Name: {memberData.name}</span>
               <span>Position: {memberData.currentPosition}</span>
-              <span>Salary: {memberData.pay}</span>
+              <span>Salary: {numToUSD(memberData.pay)}</span>
               <span>
                 Date hired: {new Date(memberData.hireDate).toLocaleDateString()}
               </span>
@@ -162,7 +163,7 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
                 {payments.map((e: any, i: number) => (
                   <span className="payments" key={"payment" + i}>{`${new Date(
                     e.dateAdded
-                  ).toLocaleDateString()} - $${e.payAmount}`}</span>
+                  ).toLocaleDateString()} - ${numToUSD(e.payAmount)}`}</span>
                 ))}
               </div>
             </div>
