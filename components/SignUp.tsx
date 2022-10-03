@@ -151,6 +151,13 @@ const SignUp: NextPage = () => {
               font-size: 18px;
             }
 
+            .submitBtn:hover {
+              color: #2185D5;
+              background-color: transparent;
+
+              border: 3px solid #2185D5;
+            }
+
             .error {
                 color: red;
 
