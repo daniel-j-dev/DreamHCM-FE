@@ -18,7 +18,9 @@ const TeamMemberCard = ({ tmData }: any) => {
         <></>
       )}
       <div className="tmCard" onClick={() => setShowModal(true)}>
-        <Image src={userIcon} alt="Profile picture" width={40} height={40} />
+        <div className="profilePic">
+          <Image src={userIcon} alt="Profile picture" width={40} height={40} />
+        </div>
         <div className="tmInfo">
           <span className="tmName">{tmData.name}</span>
           <span>{tmData.currentPosition}</span>
@@ -40,6 +42,19 @@ const TeamMemberCard = ({ tmData }: any) => {
       background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
       
       cursor: pointer;
+
+      border-radius: 15px;
+    }
+
+    .profilePic {
+      width: 40px;
+      height: 40px;
+
+      align-self: center;
+
+      //border-radius: 50%;
+
+      //box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
     }
 
     .tmInfo {
