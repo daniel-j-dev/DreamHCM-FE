@@ -4,9 +4,13 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import closeIcon from "../assets/close_icon.svg";
 import useStore from "../state/store";
-import TMEdit from "./TMEdit";
 import { deleteTeamMember, getAllTeamMembers } from "../api/teamMembers";
 import { getPayments } from "../api/payments";
+import { getSchedule, createWorkDay, deleteWorkDay } from "../api/workDay";
+import Calendar from "react-calendar";
+
+// Component imports
+import TMEdit from "./TMEdit";
 import TMPay from "./TMPay";
 
 const TMFullView = ({ setShowModal, memberData }: any) => {
@@ -14,8 +18,8 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
   const setTeamMembers = useStore((state) => state.setTeamMembers);
   const [editing, setEditing] = useState(false); // True if user clicked the "Edit" button
   const [paying, setPaying] = useState(false); // True if user clicked the "Pay" button
-
   const [payments, setPayments] = useState([]); // payments being fetched from DB by user ID
+  const [workDays, setWorkDays] = useState({});
 
   // Functions
   const handleDelete = async () => {
@@ -30,8 +34,9 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
     setTeamMembers(mems.data);
   };
 
-  // Fetch payments on component mount
+  // Fetch payments & schedule on component mount
   useEffect(() => {
+    // Payments
     getPayments(memberData._id)
       .then((foundPayments) => {
         // Sort data (by most recent?)
@@ -42,7 +47,64 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
       .catch((error) => {
         console.log(error);
       });
+
+    // Schedule
+    getMemberSchedule();
   }, []);
+
+  const getMemberSchedule = () => {
+    getSchedule(memberData._id)
+      .then((foundDays) => {
+        // Format schedule as object for O(n) lookup
+        let newSchedule = {};
+
+        for (const d of foundDays.data) {
+          const newKey = JSON.stringify(d.workDate);
+          // @ts-ignore
+          newSchedule[newKey] = true;
+        }
+
+        // Add to state
+        setWorkDays(newSchedule);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  // Handles logic when clicking on a date in <Calendar />
+  const dateClicked = (date: object) => {
+    // Turn date into a string for faster searching
+    const dateKey = JSON.stringify(date);
+
+    // If the key exists...
+    // @ts-ignore
+    if (workDays.hasOwnProperty(dateKey)) {
+      // Remove key from DB...
+      deleteWorkDay(memberData._id, date);
+
+      // Fetch new schedule & update state
+      getMemberSchedule();
+      return;
+    }
+
+    // Otherwise, add new date to DB
+    createWorkDay(memberData._id, date)
+      .then(() => {
+        // Fetch new schedule
+        getMemberSchedule();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  // Sets class name of date tiles to "date-highlight" if they're inside "workDays"
+  const setTileClassNames = ({ date }: any) => {
+    const wdKey = JSON.stringify(date);
+    if (workDays.hasOwnProperty(wdKey)) return "date-highlight";
+    return "";
+  };
 
   // JSX
   return (
@@ -74,7 +136,7 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
         )}
 
         {!editing && !paying ? (
-          <div>
+          <div className="defaultView">
             <div className="memberDetails">
               <span>Name: {memberData.name}</span>
               <span>Position: {memberData.currentPosition}</span>
@@ -83,6 +145,12 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
                 Date hired: {new Date(memberData.hireDate).toLocaleDateString()}
               </span>
             </div>
+
+            <Calendar
+              onChange={dateClicked}
+              // @ts-ignore
+              tileClassName={setTileClassNames}
+            />
 
             <div className="paymentsWrap">
               <span>Payments ({payments.length})</span>
@@ -166,16 +234,25 @@ const TMFullView = ({ setShowModal, memberData }: any) => {
       margin-right: 5px;
     }
 
-    .memberDetails {
+    .defaultView {
       width: 100%;
-      height: 100%;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .memberDetails {
+      height: 100px;
 
       padding-left: 15px;
       padding-right: 15px;
+
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
 
-      //flex-wrap: wrap;
+      margin-bottom: 10px;
 
     }
 
