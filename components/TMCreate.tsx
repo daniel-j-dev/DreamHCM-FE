@@ -20,7 +20,7 @@ const TMCreate = ({ setShowNewTMM }: any) => {
     const newMember = {
       ...v,
       payType: "Salary",
-      hireDate: Date.now(),
+      hireDate: new Date().toISOString(),
     };
 
     try {
