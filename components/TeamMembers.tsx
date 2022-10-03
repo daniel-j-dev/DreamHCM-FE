@@ -134,6 +134,12 @@ const TeamMembers = () => {
             margin-right: 30px;
         }
       }
+
+      @media only screen and (max-width: 300px) {
+        .tmInner {
+          width: 100%
+        }
+      }
    `}</style>
     </div>
   );

@@ -71,6 +71,12 @@ const TeamMemberCard = ({ tmData }: any) => {
       .tmName {
         font-weight: bold;
       }
+
+      @media only screen and (max-width: 300px) {
+        .tmCard {
+          width: 100%;
+        }
+      }
       `}</style>
       </div>
     </>
